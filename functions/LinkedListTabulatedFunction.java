@@ -262,10 +262,16 @@ public class LinkedListTabulatedFunction implements TabulatedFunction, Externali
         if (x < getLeftDomainBorder() || x > getRightDomainBorder()) {
             return Double.NaN;
         }
+        //проверяем сопвадения
+        FunctionNode current = head.next;
+        while (current != head){
+            if (equals(x, current.point.getX())) {
+                return current.point.getY(); //возвращаем y если x совпал
+            }
+            current = current.next;
+        }
 
         // поиск интервала, в котором находится x
-        // начинаем с первого реального узла
-        FunctionNode current = head.next;
         while (current != head) {
             FunctionNode next = current.next;
             // если next не голова и x находится в текущем интервале [current.x, next.x]

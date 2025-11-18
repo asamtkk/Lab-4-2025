@@ -150,6 +150,12 @@ public class ArrayTabulatedFunction implements TabulatedFunction, Externalizable
         if (x < getLeftDomainBorder() || x > getRightDomainBorder()) {
             return Double.NaN;
         }
+        //проверяем совпадения
+        for (int i = 0; i < count; i++){
+            if (equals(x, points[i].getX())){
+                return points[i].getY(); //возвращаем y, если x совпал
+            }
+        }
 
         // поиск интервала, в котором находится x
         for (int i = 0; i < count - 1; i++) {
